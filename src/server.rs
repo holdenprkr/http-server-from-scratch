@@ -13,7 +13,7 @@ impl Server {
     }
 
     pub fn run(self) {
-        println!("Hi! d(^ _ ^)b We're listening to {}, jamming!", self.addr);
+        println!("We're listening to {}, jamming! d(^ _ ^)b ", self.addr);
 
         let listener = TcpListener::bind(&self.addr).unwrap();
 
@@ -26,10 +26,9 @@ impl Server {
                             println!("Received a request: {}", String::from_utf8_lossy(&buffer));
 
                             match Request::try_from(&buffer[..]) {
-                                Ok(request) => {},
+                                Ok(request) => {}
                                 Err(e) => println!("Failed to parse a request: {}", e),
                             }
-                            
                         }
                         Err(e) => println!("Failed to read from connection: {}", e),
                     };
