@@ -28,18 +28,16 @@ impl Server {
                             let response = match Request::try_from(&buffer[..]) {
                                 Ok(request) => {
                                     dbg!(request);
-                                    let response = Response::new(
+                                    Response::new(
                                         StatusCode::Ok,
                                         Some("<h1> IT WORKS!!! </h1> ".to_string()),
-                                    );
-                                    response.send(&mut stream);
+                                    )
                                 }
                                 Err(e) => {
                                     println!("Failed to parse a request: {}", e);
-                                    Response::new(StatusCode::BadRequest, None).send(&mut stream);
+                                    Response::new(StatusCode::BadRequest, None)
                                 }
                             };
-
                             if let Err(e) = response.send(&mut stream) {
                                 println!("Failed to send response: {}", e);
                             }
